@@ -3,11 +3,12 @@ from django.shortcuts import render
 # Create your views here.
 from django.shortcuts import HttpResponse, render, redirect
 
+
 def index(request):
     return HttpResponse('Hello Monitor')
 
-def login(request):
 
+def login(request):
     error_msg = ''
 
     if request.method == 'POST':
@@ -20,12 +21,11 @@ def login(request):
             error_msg = '用户名或密码错误'
     return render(request, 'login.html', {'error_msg': error_msg})
 
-USER_LIST = [
-    {'username': 'luoyan', 'age': 23, 'gender': 'male'}
-]
 
-for i in range(1, 10):
-    temp = {'username': 'luoyan'+str(i), 'age': 23+i, 'gender': 'male'}
+USER_LIST = []
+
+for i in range(0, 10):
+    temp = {'id': i, 'username': 'luoyan' + str(i), 'age': 23 + i, 'gender': 'male'}
     USER_LIST.append(temp)
 
 
@@ -37,4 +37,12 @@ def home(request):
             'gender': request.POST.get('gender', None)
         }
         USER_LIST.append(temp)
-    return render(request, 'home.html', {'userList': USER_LIST})
+    mylist = ['zhangsan', 'lisi']
+    mydict = {'username': 'wangwu', 'age': 40}
+    age = 23
+    return render(request, 'home.html', {'userList': USER_LIST, 'mylist': mylist, 'mydict': mydict, 'age': age})
+
+
+def detail(request, *args, **kwargs):
+    print(kwargs)
+    return render(request, 'detail.html', {'user_list': USER_LIST[int(kwargs['uid'])]})

@@ -15,17 +15,33 @@
     </form>
     <table class="table table-boderd">
         <tr>
+            <td>id</td>
             <td>username</td>
             <td>age</td>
             <td>gender</td>
         </tr>
         {%  for row in  userList %}
             <tr>
+                <td><a href="/detail/{{ row.id }}/99.html/">{{ row.id }}</a></td>
                 <td>{{ row.username }}</td>
                 <td>{{ row.age }}</td>
                 <td>{{ row.gender }}</td>
             </tr>
         {%  endfor %}
     </table>
+    <hr>
+    列表索引的替换：{{ mylist.0 }}
+    字典索引的取值：{{ mydict.username }}
+
+    {% if age %}
+        有年龄
+        {% if age > 23 %}
+            青年
+            {% else %}
+                中年
+        {% endif %}
+    {% else %}
+        没有年龄
+    {% endif %}
 </body>
 </html>

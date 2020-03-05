@@ -2,11 +2,35 @@ from django.shortcuts import render
 
 # Create your views here.
 from django.shortcuts import HttpResponse, render, redirect
+from monitor import models
 
 
 def index(request):
     return HttpResponse('Hello Monitor')
 
+def orm(request):
+
+    # 添加数据
+    # 1
+    # models.UserInfo.objects.create(username='root', password='123')
+    # 2
+    # dict = {
+    #     'username': 'lisi',
+    #     'password': 'qwe'
+    # }
+    # models.UserInfo.objects.create(**dict)
+    # 3
+    # obj = models.UserInfo(username='zhangsan', password='123')
+    # obj.save()
+
+    # 查询数据
+
+    res = models.UserInfo.objects.all()
+    for info in res:
+        print(info.username)
+        print(info.password)
+
+    return HttpResponse('orm')
 
 def login(request):
     error_msg = ''
@@ -14,11 +38,11 @@ def login(request):
     if request.method == 'POST':
         username = request.POST.get('username', None)
         password = request.POST.get('password', None)
-        print(username)
-        if username == 'root' and password == '123':
-            return redirect(home)
-        else:
-            error_msg = '用户名或密码错误'
+        # if username == 'root' and password == '123':
+        #     return redirect(home)
+        # else:
+        #     error_msg = '用户名或密码错误'
+        # SQL操作
     return render(request, 'login.html', {'error_msg': error_msg})
 
 

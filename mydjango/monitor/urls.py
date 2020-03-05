@@ -6,5 +6,6 @@ urlpatterns = [
     path('index/', views.index),
     path('login/', views.login, name='login'),
     path('home/', views.home, name='home'),
+    path('orm/', views.orm),
     re_path('detail/(?P<uid>\d+)/(?P<nid>\d+).html', views.detail)
 ]

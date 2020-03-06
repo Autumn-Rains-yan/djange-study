@@ -7,41 +7,43 @@
     <link rel="stylesheet" href="/static/bootstrap.min.css">
 </head>
 <body>
-    <form action="{% url 'home' %}" method="post">
-        <input type="text" name="username" placeholder="用户名">
-        <input type="text" name="age" placeholder="年龄">
-        <input type="text" name="gender" placeholder="性别">
-        <input type="submit" value="添加">
-    </form>
-    <table class="table table-boderd">
+<form action="{% url 'home' %}" method="post">
+    <input type="text" name="username" placeholder="用户名">
+    <input type="text" name="password" placeholder="密码">
+    <input type="text" name="age" placeholder="年龄">
+    <input type="text" name="gender" placeholder="性别">
+    <input type="submit" value="添加">
+</form>
+<span style="color:red">{{ error_msg }}</span>
+<table class="table table-boderd">
+    <tr>
+        <td>id</td>
+        <td>username</td>
+        <td>age</td>
+        <td>gender</td>
+    </tr>
+    {% for row in  userList %}
         <tr>
-            <td>id</td>
-            <td>username</td>
-            <td>age</td>
-            <td>gender</td>
+            <td><a href="/monitor/detail/{{ row.id }}/">{{ row.id }}</a></td>
+            <td>{{ row.username }}</td>
+            <td>{{ row.age }}</td>
+            <td>{{ row.gender }}</td>
         </tr>
-        {%  for row in  userList %}
-            <tr>
-                <td><a href="/monitor/detail/{{ row.id }}/99.html/">{{ row.id }}</a></td>
-                <td>{{ row.username }}</td>
-                <td>{{ row.age }}</td>
-                <td>{{ row.gender }}</td>
-            </tr>
-        {%  endfor %}
-    </table>
-    <hr>
-    列表索引的替换：{{ mylist.0 }}
-    字典索引的取值：{{ mydict.username }}
-
-    {% if age %}
-        有年龄
-        {% if age > 23 %}
-            青年
-            {% else %}
-                中年
-        {% endif %}
-    {% else %}
-        没有年龄
-    {% endif %}
+    {% endfor %}
+</table>
+<hr>
+{#列表索引的替换：{{ mylist.0 }}#}
+{#字典索引的取值：{{ mydict.username }}#}
+{##}
+{#{% if age %}#}
+{#    有年龄#}
+{#    {% if age > 23 %}#}
+{#        青年#}
+{#    {% else %}#}
+{#        中年#}
+{#    {% endif %}#}
+{#{% else %}#}
+{#    没有年龄#}
+{#{% endif %}#}
 </body>
 </html>
